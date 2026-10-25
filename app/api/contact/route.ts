@@ -23,11 +23,21 @@ export async function POST(req: Request) {
     if (!/^(0|\+84)\d{9,10}$/.test(phone)) {
       return NextResponse.json({ ok: false, message: "Số điện thoại chưa đúng định dạng." }, { status: 422 });
     }
-    if (date !== "") {
-      const d = new Date(date);
-      if (isNaN(d.getTime()) || d.toISOString().slice(0,10) !== date) {
-        return NextResponse.json({ ok: false, message: "Ngày cưới không hợp lệ." }, { status: 422 });
-      }
+    if (date === "") {
+      return NextResponse.json({ ok: false, message: "Vui lòng chọn ngày cưới dự kiến." }, { status: 422 });
+    }
+    const d = new Date(date);
+    if (isNaN(d.getTime()) || d.toISOString().slice(0,10) !== date) {
+      return NextResponse.json({ ok: false, message: "Ngày cưới không hợp lệ." }, { status: 422 });
+    }
+    if (budget === "") {
+      return NextResponse.json({ ok: false, message: "Vui lòng chọn ngân sách dự kiến." }, { status: 422 });
+    }
+    if (service === "") {
+      return NextResponse.json({ ok: false, message: "Vui lòng chọn dịch vụ quan tâm." }, { status: 422 });
+    }
+    if (message === "") {
+      return NextResponse.json({ ok: false, message: "Vui lòng nhập nội dung bạn muốn Kèo Cưới biết thêm." }, { status: 422 });
     }
     if (message.length > 2000) {
       return NextResponse.json({ ok: false, message: "Lời nhắn hơi dài, bạn rút gọn giúp tụi mình nhé." }, { status: 422 });
@@ -48,11 +58,12 @@ export async function POST(req: Request) {
 
 Tên: ${name}
 SĐT/Zalo: ${phone}
-Ngày cưới: ${date || '—'}
-Ngân sách: ${budget || '—'}
-Dịch vụ: ${service || '—'}
-Lời nhắn:
-${message || '—'}
+Ngày cưới: ${date}
+Ngân sách: ${budget}
+Dịch vụ: ${service}
+
+Điều bạn muốn Kèo Cưới biết thêm:
+${message}
 
 Thời gian: ${new Date().toLocaleString('vi-VN')}`;
 
