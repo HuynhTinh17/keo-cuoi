@@ -1,14 +1,15 @@
 <?php
-require __DIR__ . '/config/db.php';
+// require __DIR__ . '/config/db.php';
 
 $page  = 'lien-he';
 $title = 'Liên hệ — Kèo Cưới';
 
 try {
-    $svcTitles = db()->query('SELECT title FROM services WHERE is_active = 1 ORDER BY sort_order, id')
-                     ->fetchAll(PDO::FETCH_COLUMN);
+    // $svcTitles = db()->query('SELECT title FROM services WHERE is_active = 1 ORDER BY sort_order, id')
+    //                  ->fetchAll(PDO::FETCH_COLUMN);
+    $svcTitles = [];
 } catch (Throwable $e) {
-    error_log($e->getMessage());
+    // error_log($e->getMessage());
     $svcTitles = [];
 }
 

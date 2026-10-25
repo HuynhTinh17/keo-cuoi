@@ -1,13 +1,14 @@
 <?php
-require __DIR__ . '/config/db.php';
+// require __DIR__ . '/config/db.php';
 
 $page  = 'dich-vu';
 $title = 'Dịch vụ — Kèo Cưới';
 
 try {
-    $services = db()->query('SELECT * FROM services WHERE is_active = 1 ORDER BY sort_order, id')->fetchAll();
+    // $services = db()->query('SELECT * FROM services WHERE is_active = 1 ORDER BY sort_order, id')->fetchAll();
+    $services = [];
 } catch (Throwable $e) {
-    error_log($e->getMessage());
+    // error_log($e->getMessage());
     $services = [];
 }
 

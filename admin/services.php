@@ -1,9 +1,9 @@
 <?php
 require __DIR__ . '/auth.php';
 require_login();
-require __DIR__ . '/../config/db.php';
+// require __DIR__ . '/../config/db.php';
 
-$pdo = db();
+$pdo = null;
 $error = '';
 
 $styles = [
@@ -26,7 +26,7 @@ $edit = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    check_csrf();
+    // check_csrf();
     $action = $_POST['action'] ?? '';
     $id     = (int)($_POST['id'] ?? 0);
 
@@ -54,39 +54,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                || mb_strlen($edit['link_text']) > 50) {
             $error = 'Có ô nhập quá dài, bạn rút gọn giúp nhé.';
         } else {
-            $values = [
-                $edit['icon'], $edit['label'], $edit['title'], $edit['description'],
-                $edit['footer_text'], $edit['link_text'], $edit['card_style'],
-                $edit['sort_order'], $edit['is_active'],
-            ];
-            if ($id > 0) {
-                $pdo->prepare(
-                    'UPDATE services SET icon=?, label=?, title=?, description=?, footer_text=?,
-                     link_text=?, card_style=?, sort_order=?, is_active=? WHERE id=?'
-                )->execute([...$values, $id]);
-            } else {
-                $pdo->prepare(
-                    'INSERT INTO services (icon, label, title, description, footer_text,
-                     link_text, card_style, sort_order, is_active) VALUES (?,?,?,?,?,?,?,?,?)'
-                )->execute($values);
-            }
+            // $values = [
+            //     $edit['icon'], $edit['label'], $edit['title'], $edit['description'],
+            //     $edit['footer_text'], $edit['link_text'], $edit['card_style'],
+            //     $edit['sort_order'], $edit['is_active'],
+            // ];
+            // if ($id > 0) {
+            //     $pdo->prepare(
+            //         'UPDATE services SET icon=?, label=?, title=?, description=?, footer_text=?,
+            //          link_text=?, card_style=?, sort_order=?, is_active=? WHERE id=?'
+            //     )->execute([...$values, $id]);
+            // } else {
+            //     $pdo->prepare(
+            //         'INSERT INTO services (icon, label, title, description, footer_text,
+            //          link_text, card_style, sort_order, is_active) VALUES (?,?,?,?,?,?,?,?,?)'
+            //     )->execute($values);
+            // }
             header('Location: services.php');
             exit;
         }
     } elseif ($action === 'delete') {
-        $pdo->prepare('DELETE FROM services WHERE id = ?')->execute([$id]);
+        // $pdo->prepare('DELETE FROM services WHERE id = ?')->execute([$id]);
         header('Location: services.php');
         exit;
     }
 } elseif (isset($_GET['edit'])) {
-    $stmt = $pdo->prepare('SELECT * FROM services WHERE id = ?');
-    $stmt->execute([(int)$_GET['edit']]);
-    if ($row = $stmt->fetch()) {
-        $edit = $row;
-    }
+    // $stmt = $pdo->prepare('SELECT * FROM services WHERE id = ?');
+    // $stmt->execute([(int)$_GET['edit']]);
+    // if ($row = $stmt->fetch()) {
+    //     $edit = $row;
+    // }
 }
 
-$services = $pdo->query('SELECT * FROM services ORDER BY sort_order, id')->fetchAll();
+$services = [];
 ?>
 <!DOCTYPE html>
 <html lang="vi">

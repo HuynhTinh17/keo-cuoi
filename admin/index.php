@@ -1,9 +1,9 @@
 <?php
 require __DIR__ . '/auth.php';
 require_login();
-require __DIR__ . '/../config/db.php';
+// require __DIR__ . '/../config/db.php';
 
-$pdo = db();
+$pdo = null;
 $statuses = [
     'new'       => 'Mới',
     'contacted' => 'Đã liên hệ',
@@ -13,16 +13,16 @@ $statuses = [
 
 // Xử lý đổi trạng thái / xoá
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    check_csrf();
-    $id     = (int)($_POST['id'] ?? 0);
-    $action = $_POST['action'] ?? '';
+    // check_csrf();
+    // $id     = (int)($_POST['id'] ?? 0);
+    // $action = $_POST['action'] ?? '';
 
-    if ($action === 'status' && isset($statuses[$_POST['status'] ?? ''])) {
-        $pdo->prepare('UPDATE leads SET status = ? WHERE id = ?')
-            ->execute([$_POST['status'], $id]);
-    } elseif ($action === 'delete') {
-        $pdo->prepare('DELETE FROM leads WHERE id = ?')->execute([$id]);
-    }
+    // if ($action === 'status' && isset($statuses[$_POST['status'] ?? ''])) {
+    //     $pdo->prepare('UPDATE leads SET status = ? WHERE id = ?')
+    //         ->execute([$_POST['status'], $id]);
+    // } elseif ($action === 'delete') {
+    //     $pdo->prepare('DELETE FROM leads WHERE id = ?')->execute([$id]);
+    // }
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
 }
@@ -30,25 +30,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Lọc + tìm kiếm
 $filter = $_GET['status'] ?? '';
 $q      = trim($_GET['q'] ?? '');
-$sql    = 'SELECT * FROM leads WHERE 1';
-$params = [];
-if (isset($statuses[$filter])) {
-    $sql .= ' AND status = ?';
-    $params[] = $filter;
-}
-if ($q !== '') {
-    $sql .= ' AND (name LIKE ? OR phone LIKE ?)';
-    $params[] = "%$q%";
-    $params[] = "%$q%";
-}
-$sql .= ' ORDER BY created_at DESC';
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-$leads = $stmt->fetchAll();
+// $sql    = 'SELECT * FROM leads WHERE 1';
+// $params = [];
+// if (isset($statuses[$filter])) {
+//     $sql .= ' AND status = ?';
+//     $params[] = $filter;
+// }
+// if ($q !== '') {
+//     $sql .= ' AND (name LIKE ? OR phone LIKE ?)';
+//     $params[] = "%$q%";
+//     $params[] = "%$q%";
+// }
+// $sql .= ' ORDER BY created_at DESC';
+// $stmt = $pdo->prepare($sql);
+// $stmt->execute($params);
+$leads = [];
 
-$counts = $pdo->query('SELECT status, COUNT(*) FROM leads GROUP BY status')
-              ->fetchAll(PDO::FETCH_KEY_PAIR);
-$total = array_sum($counts);
+// $counts = $pdo->query('SELECT status, COUNT(*) FROM leads GROUP BY status')
+//               ->fetchAll(PDO::FETCH_KEY_PAIR);
+$counts = [];
+$total = 0;
 ?>
 <!DOCTYPE html>
 <html lang="vi">

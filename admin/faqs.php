@@ -1,14 +1,14 @@
 <?php
 require __DIR__ . '/auth.php';
 require_login();
-require __DIR__ . '/../config/db.php';
+// require __DIR__ . '/../config/db.php';
 
-$pdo   = db();
+$pdo   = null;
 $error = '';
 $edit  = ['id' => 0, 'question' => '', 'answer' => '', 'sort_order' => 0, 'is_active' => 1];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    check_csrf();
+    // check_csrf();
     $action = $_POST['action'] ?? '';
     $id     = (int)($_POST['id'] ?? 0);
 
@@ -23,30 +23,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($edit['question'] === '' || $edit['answer'] === '' || mb_strlen($edit['question']) > 255) {
             $error = 'Vui lòng nhập đủ câu hỏi (tối đa 255 ký tự) và câu trả lời.';
         } else {
-            if ($id > 0) {
-                $pdo->prepare('UPDATE faqs SET question=?, answer=?, sort_order=?, is_active=? WHERE id=?')
-                    ->execute([$edit['question'], $edit['answer'], $edit['sort_order'], $edit['is_active'], $id]);
-            } else {
-                $pdo->prepare('INSERT INTO faqs (question, answer, sort_order, is_active) VALUES (?, ?, ?, ?)')
-                    ->execute([$edit['question'], $edit['answer'], $edit['sort_order'], $edit['is_active']]);
-            }
+            // if ($id > 0) {
+            //     $pdo->prepare('UPDATE faqs SET question=?, answer=?, sort_order=?, is_active=? WHERE id=?')
+            //         ->execute([$edit['question'], $edit['answer'], $edit['sort_order'], $edit['is_active'], $id]);
+            // } else {
+            //     $pdo->prepare('INSERT INTO faqs (question, answer, sort_order, is_active) VALUES (?, ?, ?, ?)')
+            //         ->execute([$edit['question'], $edit['answer'], $edit['sort_order'], $edit['is_active']]);
+            // }
             header('Location: faqs.php');
             exit;
         }
     } elseif ($action === 'delete') {
-        $pdo->prepare('DELETE FROM faqs WHERE id = ?')->execute([$id]);
+        // $pdo->prepare('DELETE FROM faqs WHERE id = ?')->execute([$id]);
         header('Location: faqs.php');
         exit;
     }
 } elseif (isset($_GET['edit'])) {
-    $stmt = $pdo->prepare('SELECT * FROM faqs WHERE id = ?');
-    $stmt->execute([(int)$_GET['edit']]);
-    if ($row = $stmt->fetch()) {
-        $edit = $row;
-    }
+    // $stmt = $pdo->prepare('SELECT * FROM faqs WHERE id = ?');
+    // $stmt->execute([(int)$_GET['edit']]);
+    // if ($row = $stmt->fetch()) {
+    //     $edit = $row;
+    // }
 }
 
-$faqs = $pdo->query('SELECT * FROM faqs ORDER BY sort_order, id')->fetchAll();
+$faqs = [];
 ?>
 <!DOCTYPE html>
 <html lang="vi">
