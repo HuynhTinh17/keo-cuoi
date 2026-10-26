@@ -1,6 +1,21 @@
 /*!*************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./app/globals.css ***!
   \*************************************************************************************************************************************************************************************************************************************************************/
+            @keyframes pageEnter {
+                from {
+                    opacity: 0;
+                    transform: translateY(18px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .page-enter {
+                animation: pageEnter .55s cubic-bezier(.22,1,.36,1) both;
+            }
+
             :root {
                 --cream: #f7f1e7;
                 --paper: #fffaf2;
@@ -90,9 +105,11 @@
                 color: var(--paper);
                 display: grid;
                 place-items: center;
-                border-radius: 50% 50% 50% 8px;
+                border-radius: 50%;
                 font-family: "Playfair Display",serif;
-                font-size: 22px
+                font-size: 22px;
+                object-fit: cover;
+                flex-shrink: 0
             }
 
             .nav-links {
@@ -661,6 +678,22 @@
 
             .faq-item.open .faq-answer {
                 display: block
+            }
+
+            .faq-group {
+                margin-bottom: 34px
+            }
+
+            .faq-group:last-child {
+                margin-bottom: 0
+            }
+
+            .faq-group-title {
+                font-family: "Playfair Display",serif;
+                font-size: 20px;
+                font-weight: 600;
+                margin: 0 0 6px;
+                color: var(--ink)
             }
 
             .contact {

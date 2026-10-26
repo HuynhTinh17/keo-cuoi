@@ -9,7 +9,7 @@ export default function Header({ page = "" }: { page?: string }) {
     <header className="nav">
       <div className="wrap nav-inner">
         <Link className="logo" href="/" aria-label="Kèo Cưới - Trang chủ">
-          <span className="logo-mark">k</span>
+          <img className="logo-mark" src="/assets/img/logo.jpg" alt="Kèo Cưới" />
           <span>Kèo Cưới<span style={{ color: "var(--terra)" }}>.</span></span>
         </Link>
         <button className="menu-toggle" aria-label="Mở menu" aria-expanded="false">☰</button>

@@ -1,3 +1,5 @@
+import ScrollDownButton from "@/components/ScrollDownButton";
+
 export default function Page() {
   return (
     <>
@@ -36,9 +38,10 @@ export default function Page() {
             </div>
           </div>
         </div>
+        <ScrollDownButton targetId="explore" />
       </section>
 
-      <section className="section section-paper">
+      <section id="explore" className="section section-paper">
         <div className="wrap">
           <div className="section-head">
             <div>
@@ -97,6 +100,7 @@ export default function Page() {
             <a className="btn" href="/lien-he">Kể tụi mình nghe ↗</a>
           </div>
         </div>
+        <ScrollDownButton targetId="explore" />
       </section>
 
       <section className="quote-section">
