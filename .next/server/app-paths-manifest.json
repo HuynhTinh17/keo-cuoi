@@ -1,5 +1,7 @@
 {
-  "/api/contact/route": "app/api/contact/route.js",
   "/page": "app/page.js",
-  "/lien-he/page": "app/lien-he/page.js"
+  "/lien-he/page": "app/lien-he/page.js",
+  "/dich-vu/page": "app/dich-vu/page.js",
+  "/ve-chung-toi/page": "app/ve-chung-toi/page.js",
+  "/quy-trinh/page": "app/quy-trinh/page.js"
 }
