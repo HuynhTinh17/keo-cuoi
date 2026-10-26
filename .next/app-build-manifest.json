@@ -20,21 +20,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/contact/route.js"
-    ],
-    "/dich-vu/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dich-vu/page.js"
-    ],
-    "/ve-chung-toi/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/ve-chung-toi/page.js"
-    ],
-    "/quy-trinh/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/quy-trinh/page.js"
     ]
   }
 }

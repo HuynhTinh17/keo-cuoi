@@ -1,3 +1,5 @@
+import ContactForm from "./ContactForm";
+
 export const metadata = {
   title: "Liên hệ — Kèo Cưới",
 };
@@ -7,7 +9,7 @@ export default function Page() {
     <section className="section contact" id="contact">
       <div className="wrap contact-grid">
         <div className="contact-copy">
-          <span className="eyebrow">Let's make it yours</span>
+          <span className="eyebrow">Let&apos;s make it yours</span>
           <h2>Kể tụi mình nghe về ngày của bạn.</h2>
           <p>Chưa cần quyết định ngay. Hãy bắt đầu bằng vài thông tin cơ bản, Kèo Cưới sẽ cùng bạn tìm hướng đi phù hợp.</p>
           <div className="contact-details">
@@ -17,51 +19,7 @@ export default function Page() {
           </div>
         </div>
 
-        <form className="contact-form" id="leadForm">
-          <input type="text" name="website" tabIndex={-1} autoComplete="off"
-                 style={{position:"absolute",left:"-9999px"}} aria-hidden="true" />
-
-          <div className="form-grid">
-            <div className="field">
-              <label htmlFor="name">Tên của bạn *</label>
-              <input id="name" name="name" placeholder="Tên bạn" required />
-            </div>
-            <div className="field">
-              <label htmlFor="phone">Số điện thoại / Zalo *</label>
-              <input id="phone" name="phone" placeholder="09xx xxx xxx" required />
-            </div>
-            <div className="field">
-              <label htmlFor="date">Ngày cưới dự kiến</label>
-              <input id="date" name="date" type="date" />
-            </div>
-            <div className="field">
-              <label htmlFor="budget">Ngân sách dự kiến</label>
-              <select id="budget" name="budget">
-                <option value="">Chọn khoảng ngân sách</option>
-                <option>Dưới 50 triệu</option>
-                <option>50–100 triệu</option>
-                <option>100–200 triệu</option>
-                <option>Trên 200 triệu</option>
-                <option>Chưa xác định</option>
-              </select>
-            </div>
-            <div className="field full">
-              <label htmlFor="service">Bạn đang cần hỗ trợ gì?</label>
-              <select id="service" name="service">
-                <option value="">Chọn dịch vụ quan tâm</option>
-                <option>Mình chưa rõ, cần tư vấn</option>
-              </select>
-            </div>
-            <div className="field full">
-              <label htmlFor="message">Điều bạn muốn Kèo Cưới biết thêm</label>
-              <textarea id="message" name="message" placeholder="Phong cách yêu thích, số khách dự kiến, điều quan trọng nhất với hai bạn..."></textarea>
-            </div>
-          </div>
-
-          <button className="btn" type="submit">Gửi lời nhắn cho Kèo Cưới <span>↗</span></button>
-          <p className="form-note">Thông tin của bạn chỉ dùng để Kèo Cưới liên hệ tư vấn.</p>
-          <div className="form-success" id="formSuccess" role="status"></div>
-        </form>
+        <ContactForm />
       </div>
     </section>
   );
